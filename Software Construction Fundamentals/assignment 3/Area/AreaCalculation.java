@@ -9,6 +9,7 @@ public class AreaCalculation {
      * @return area of triangle as double
      */
     public double triangleArea(double width, double height) {
+        if( width <= 0 || height <= 0) throw new ArithmeticException("Value should be greater then 0");
         return 0.5 * width * height;
     }
 
@@ -20,6 +21,7 @@ public class AreaCalculation {
      * @return area of rectangle as double
      */
     public double rectangleArea(double width, double height) {
+        if( width <= 0 || height <= 0) throw new ArithmeticException("Value should be greater then 0");
         return width * height;
     }
 
@@ -30,6 +32,7 @@ public class AreaCalculation {
      * @return area of squire as double
      */
     public double squireArea(double width) {
+        if( width <= 0) throw new ArithmeticException("Value should be greater then 0");
         return Math.pow(width, 2);
     }
 
@@ -40,6 +43,7 @@ public class AreaCalculation {
      * @return area of circle as double
      */
     public double circleArea(double radius) {
+        if( radius <= 0 ) throw new ArithmeticException("Value should be greater then 0");
         return (Math.PI) * Math.pow(radius, 2);
     }
 }
