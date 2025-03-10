@@ -4,8 +4,10 @@ public class StringOperation {
      * @param String str2 as second input String
      * @return 1 if both equls otherwise 0
      */
-    public boolean isEquals(String str1, String str2) {
-        return str1.equals(str2);
+    public int isEquals(String str1, String str2) {
+        if (str1 == str2)
+            return 1;
+        return 0;
     }
 
     /**
@@ -13,10 +15,7 @@ public class StringOperation {
      * @return reverse String of str1
      */
     public String revseString(String str) {
-        StringBuilder s = new StringBuilder();
-        for (int i = 0; i < str.length(); i++) {
-            s.append(str.charAt(i));
-        }
+        StringBuilder s = new StringBuilder(str);
         s.reverse();
         return s.toString();
     }
@@ -57,7 +56,6 @@ public class StringOperation {
                     ans = s.toString();
                     s = new StringBuilder("");
                     maxLength = currLength;
-                    System.out.println(maxLength + " " + currLength + " " + ans);
                     currLength = 0;
                 } else {
                     s = new StringBuilder("");
