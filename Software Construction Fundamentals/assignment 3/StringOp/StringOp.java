@@ -16,8 +16,8 @@ public class StringOp {
             System.out.println("Select option");
             int option = 0;
             try {
-                
-                 option = Integer.parseInt(sc.nextLine());
+
+                option = Integer.parseInt(sc.nextLine());
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
@@ -29,7 +29,7 @@ public class StringOp {
                 str1 = sc.nextLine();
                 System.out.println("Enter second String for checking equlity");
                 str2 = sc.nextLine();
-            } else if(option !=5) {
+            } else if (option != 5) {
                 System.out.println("Enter a String ");
                 str = sc.nextLine();
             }
@@ -47,7 +47,7 @@ public class StringOp {
                     break;
                 case 3:
 
-                    System.out.println("Modification of given String is ->" + op.replaceChar(str));
+                    System.out.println("Modification of given String is ->" + op.toggleChar(str));
                     break;
                 case 4:
 
