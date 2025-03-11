@@ -166,6 +166,11 @@ public class TestingAndJunit {
         }
     }
 
+    /**
+     * Print the given Array
+     * @param arr
+     */
+
     public void printArray(int arr[]) {
 
         try {
@@ -176,7 +181,10 @@ public class TestingAndJunit {
             System.out.println(e.getMessage());
         }
     }
-
+/**
+ * Validate that user enter correct integer or not
+ * @return Integer value enter by user
+ */
     public static int inputValidator() {
 
         try {
@@ -200,6 +208,13 @@ public class TestingAndJunit {
 
     }
 
+    /**
+     * Validate the option which is selected by user
+     * @param min 
+     * @param max
+     * @param option
+     * @return option enter my user
+     */
     public static int optionValidator(int min, int max, int option) {
 
         try {
@@ -224,7 +239,7 @@ public class TestingAndJunit {
     public static void main(String[] args) {
         try {
             TestingAndJunit T = new TestingAndJunit();
-            Scanner sc = new Scanner(System.in);
+            
 
             boolean flag = true;
             while (flag) {
