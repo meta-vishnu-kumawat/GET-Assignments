@@ -2,15 +2,16 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import  org.junit.BeforeClass;
+
 public class SeesionTest {
  
 
 
 
 
-    @BeforeClass  
+    @BeforeAll  
     public static void setUpBeforeClass() throws Exception {  
         System.out.println("before class");  
     }  
@@ -18,7 +19,7 @@ public class SeesionTest {
 
     @Test
     public void testCaseForLargestMirrorSection(){
-        System.out.println("test case find max");  
+          
        
       
         /**
