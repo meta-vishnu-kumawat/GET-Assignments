@@ -14,7 +14,7 @@ public class PayrollTest {
     public void testPayroll() {
         // Step 1: Create the organization
         Organization org = new Organization("Metacube");
-
+        
         // Step 2: Create a department for developers
         Department devDept = new Department("Development");
 
