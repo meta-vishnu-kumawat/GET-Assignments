@@ -10,7 +10,6 @@ private int base = 16;
      hexNum =  hexNum.toUpperCase();
       for(int i  = 0;i<hexNum.length();i++){
          int digit = hex.indexOf(hexNum.charAt(i));
-
          decimal = decimal *base +digit;
       }
       return decimal;

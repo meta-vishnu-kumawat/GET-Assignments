@@ -1,15 +1,15 @@
 
 INSERT INTO Category (Name, ParentCategoryID) VALUES
-('Electronics', NULL),         -- 1
-('Fashion', NULL),             -- 2
-('Home & Kitchen', NULL),      -- 3
-('Mobile Phones', 1),          -- 4 (child of Electronics)
-('Laptops', 1),                -- 5 (child of Electronics)
-('Men''s Clothing', 2),        -- 6 (child of Fashion)
-('Women''s Clothing', 2),      -- 7 (child of Fashion)
-('Appliances', 3),             -- 8 (child of Home & Kitchen)
-('Furniture', 3),              -- 9 (child of Home & Kitchen)
-('Tablets', 1);                -- 10 (child of Electronics)
+('Electronics', NULL),        
+('Fashion', NULL),           
+('Home & Kitchen', NULL),      
+('Mobile Phones', 1),          
+('Laptops', 1),               
+('Men''s Clothing', 2),        
+('Women''s Clothing', 2),      
+('Appliances', 3),             
+('Furniture', 3),              
+('Tablets', 1);                
 
 
 INSERT INTO Product (Name, Description, Price, StockQuantity) VALUES
@@ -26,16 +26,16 @@ INSERT INTO Product (Name, Description, Price, StockQuantity) VALUES
 
 
 INSERT INTO ProductCategory (ProductID, CategoryID) VALUES
-(1, 4),   -- iPhone 14 -> Mobile Phones
-(1, 10),  -- iPhone 14 -> Tablets
-(2, 5),   -- MacBook Pro -> Laptops
-(3, 4),   -- Galaxy S22 -> Mobile Phones
-(4, 5),   -- Dell XPS 13 -> Laptops
-(5, 1),   -- Sony WH-1000XM4 -> Electronics
-(6, 2),   -- Nike Running Shoes -> Fashion
-(7, 6),   -- Levi's Jeans -> Men's Clothing
-(8, 8),   -- KitchenAid Mixer -> Appliances
-(9, 9);   -- Ikea Sofa -> Furniture
+(1, 4),   
+(1, 10),  
+(2, 5),   
+(3, 4),   
+(4, 5),  
+(5, 1),   
+(6, 2),   
+(7, 6),  
+(8, 8),   
+(9, 9);   
 
 
 INSERT INTO Image (URL, ProductID) VALUES
