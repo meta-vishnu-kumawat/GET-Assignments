@@ -16,8 +16,10 @@ CREATE TABLE Product (
     ProductID INT AUTO_INCREMENT PRIMARY KEY,      
     Name VARCHAR(100) NOT NULL,                     
     Description TEXT,                                
-    Price DECIMAL(10, 2) NOT NULL,                 
-    StockQuantity INT NOT NULL                       
+    Price DECIMAL(10, 2) CHECK (Price >= 0), 
+    QuantityOnHand INT CHECK (QuantityOnHand >= 0),
+    IsActive BOOLEAN NOT NULL DEFAULT TRUE,      
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP                   
 );
 
 -- Create the ProductCategory 
