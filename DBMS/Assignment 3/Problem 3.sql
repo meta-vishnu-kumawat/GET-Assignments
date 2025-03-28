@@ -11,7 +11,8 @@ LEFT JOIN OrderTable o
     ON u.UserID = o.ShopperID 
     AND o.OrderDate >= (NOW() - INTERVAL 30 DAY)
 WHERE u.Role = 'Shopper'
-GROUP BY u.UserID, u.Username, u.Email;
+GROUP BY u.UserID, u.Username, u.Email
+HAVING OrderCount > 0;
 
 -- 3.2: Display the top 10 Shoppers who generated maximum revenue in the last 30 days.
 SELECT 
@@ -87,3 +88,8 @@ WHERE oi.Status = 'Canceled'
 GROUP BY p.ProductID, p.Name
 ORDER BY CanceledCount DESC
 LIMIT 10;
+
+ CREATE PROCEDURE selectAllUser
+     AS
+    SELECT * FROM User
+     Go;
