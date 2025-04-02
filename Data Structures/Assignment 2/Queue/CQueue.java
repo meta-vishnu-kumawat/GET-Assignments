@@ -43,7 +43,7 @@ public class CQueue {
       }
     }
   
-    // Removing an element
+   
     int deQueue() {
       int element;
       if (isEmpty()) {
@@ -63,7 +63,6 @@ public class CQueue {
     }
   
     void display() {
-      /* Function to display status of Circular Queue */
       int i;
       if (isEmpty()) {
         System.out.println("Empty Queue");
