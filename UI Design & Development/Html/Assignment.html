@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metacube Parking System</title>
+    <link rel="stylesheet" href="Style.css">
+    <style>
+        /* Basic styling for smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="#employee">Add Employee</a></li>
+            <li><a href="#vehicle">Add Vehicle</a></li>
+            <li><a href="#feedback">Give Feedback</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+        </ul>
+        
+    </nav>
+
+    <!-- Cover Image -->
+    <header>
+        <img src="cover.jpg" alt="Parking System Cover Image">
+    </header>
+
+    <!-- Employee Section -->
+    <section id="employee">
+        <h2>Add Employee</h2>
+        <form>
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="email">Email ID:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" id="confirm-password" name="confirm-password" required>
+
+            <label for="contact">Contact Number:</label>
+            <input type="tel" id="contact" name="contact" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <!-- Vehicle Section -->
+    <section id="vehicle">
+        <h2>Add Vehicle</h2>
+        <form>
+            <label for="make">Vehicle Make (Company):</label>
+            <input type="text" id="make" name="make" required>
+
+            <label for="model">Vehicle Model:</label>
+            <input type="text" id="model" name="model" required>
+
+            <label for="type">Type:</label>
+            <input type="text" id="type" name="type" required>
+
+            <label for="number">Vehicle Number:</label>
+            <input type="text" id="number" name="number" required>
+
+            <label for="employee-id">Employee ID:</label>
+            <input type="text" id="employee-id" name="employee-id" required>
+
+            <label for="identification">Identification:</label>
+            <textarea id="identification" name="identification" placeholder="Color, mark, accessory, etc." required></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <!-- Feedback Section -->
+    <section id="feedback">
+        <h2>Give Feedback</h2>
+        <form>
+            <label for="comments">Your Feedback:</label>
+            <textarea id="comments" name="comments" required></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing">
+        <h2>Pricing</h2>
+        <table border ="1">
+            <tr>
+                <th>Type</th>
+                <th>Daily Price</th>
+                <th>Monthly Price</th>
+                <th>Yearly Price</th>
+            </tr>
+            <tr>
+                <td>Cycle</td>
+                <td>5</td>
+                <td>100</td>
+                <td>500</td>
+            </tr>
+            <tr>
+                <td>Motorcycle</td>
+                <td>10</td>
+                <td>200</td>
+                <td>1000</td>
+            </tr>
+            <tr>
+                <td>Four Wheelers</td>
+                <td>20</td>
+                <td>500</td>
+                <td>3500</td>
+            </tr>
+        </table>
+    </section>
+
+</body>
+</html>
