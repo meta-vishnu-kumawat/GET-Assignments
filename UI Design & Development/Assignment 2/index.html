@@ -1,0 +1,133 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App Landing Page</title>  <!-- Google Font -->  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KY4U1p7a+6Z4Fz+X5jqIitZgz8tM4jHjP+3+3t5VZ+ig516OcD5ZK8zUFZi5S5sYVw/wzdfJxFN3CQWNAzhYGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- External CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container header-inner">
+      <div class="logo">LOGO TITLE</div>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#download">Download</a></li>
+        </ul>
+      </nav>
+      <div class="social">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </header>  <!-- Hero Section -->  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <h1>Get the most fun<br/>weather app</h1>
+        <p class="hero-subtitle">Experience your weather like never before</p>
+        <div class="btn-group">
+          <a href="#download" class="btn btn-primary">Download</a>
+          <a href="#features" class="btn btn-secondary">Features</a>
+        </div>
+      </div>
+      <div class="hero-mockup">
+        <img src="images/phone01.png" alt="Phone Mockup">
+      </div>
+    </div>
+    <!-- Decorative circles -->
+    <div class="circle small orange" style="top:20%; left:10%;"></div>
+    <div class="circle medium yellow" style="top:50%; right:15%;"></div>
+    <div class="circle large blue-dark" style="bottom:10%; left:25%;"></div>
+  </section>  <!-- Features -->  <section id="features" class="features container">
+    <h2>Perfect Features</h2>
+    <div class="feature-items">
+      <div class="feature">
+        <i class="fas fa-user-friends feature-icon"></i>
+        <h3>Usability</h3>
+        <p>Designing the simplest things for your convenience and speed.</p>
+      </div>
+      <div class="feature">
+        <i class="fas fa-layer-group feature-icon"></i>
+        <h3>Parallax Effect</h3>
+        <p>Interactive scrolling camera effect that adds depth to your UI.</p>
+      </div>
+      <div class="feature">
+        <i class="fas fa-palette feature-icon"></i>
+        <h3>Unlimited Colors</h3>
+        <p>Choose from any palette to fit your mood and brand.</p>
+      </div>
+    </div>
+  </section>  <!-- Screenshot Carousel -->  <!-- Screenshot Carousel using actual images -->
+  <section class="carousel container">
+    <div class="carousel-images">
+      <img src="images/drag1.png" alt="Widget Drag 1">
+      <img src="images/drag2.png" alt="Widget Drag 2">
+      <img src="images/drag3.png" alt="Widget Drag 3">
+    </div>
+  </section>
+    <!-- Detailed Screenshots -->  <section class="screenshots container">
+    <div class="screenshot">
+      <img src="images/screen01.png" alt="Cloudy" class="phone">
+      <div class="desc">
+        <img src="images/cloud1.png" alt="Cloud Icon" class="screenshot-icon">
+        <h3>When the clouds</h3>
+        <p>Variable information on air humidity, feeling of the weather, and ability to share this with your friends.</p>
+      </div>
+    </div>
+    <div class="screenshot">
+      <img src="images/screen02.png" alt="Sunny" class="phone">
+      <div class="desc">
+        <img src="images/sun1.png" alt="Sun Icon" class="screenshot-icon">
+        <h3>When it's sunny</h3>
+        <p>Sometimes the simplest things are the hardest to find. We created a new line for everyday life. Sometimes the simplest things.</p>
+      </div>
+    </div>
+    <div class="screenshot">
+      <img src="images/screen03.png" alt="Rainy" class="phone">
+      <div class="desc">
+        <img src="images/rainy1.png" alt="Rain Icon" class="screenshot-icon">
+        <h3>When the rain</h3>
+        <p>Sometimes the simplest things are the hardest to find. We created a new line for everyday life. Sometimes the simplest things.</p>
+      </div>
+    </div>
+  </section>  <!-- Reviews -->  <section id="reviews" class="reviews container">
+    <h2>What reviews are saying</h2>
+    <div class="review-items">
+      <div class="review">
+        <span class="quote">“What art offers is space – a certain breathing room for the spirit.”</span>
+        <span class="author">– John Updike</span>
+      </div>
+      <div class="review">
+        <span class="quote">“We do not see nature with our eyes, but with our understandings and our hearts.”</span>
+        <span class="author">– William Hazlitt</span>
+      </div>
+      <div class="review">
+        <span class="quote">“The only courage that matters is the kind that gets you from one moment to the next.”</span>
+        <span class="author">– Mignon McLaughlin</span>
+      </div>
+      <div class="review">
+        <span class="quote">“No man has a good enough memory to be a successful liar.”</span>
+        <span class="author">– Abraham Lincoln</span>
+      </div>
+    </div>
+  </section>  <!-- Download CTA -->  <section id="download" class="cta">
+    <div class="container">
+      <h2>How to Download the app?</h2>
+      <p>Just download the app from the store, install it, and enjoy the simplest weather experience ever.</p>
+      <div class="store-badges">
+        <img src="images/appstor.png" alt="App Store">
+        <img src="images/googleplay.png" alt="Google Play">
+      </div>
+    </div>
+  </section>  <!-- Footer -->  <footer>
+    <p>&copy; 2025 Weather App. All rights reserved.</p>
+  </footer>
+</body>
+</html>

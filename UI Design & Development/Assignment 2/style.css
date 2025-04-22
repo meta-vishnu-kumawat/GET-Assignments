@@ -1,0 +1,264 @@
+/* styles.css */
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+/* Color palette */
+:root {
+  --blue: #4a88ff;
+  --blue-light: #f0f4ff;
+  --dark: #222;
+  --gray: #666;
+  --light-gray: #f7f7f7;
+  --orange: #ff6a47;
+  --yellow: #fdd835;
+  --white: #fff;
+}
+/* Container */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+/* Header */
+header {
+  background: var(--blue);
+  padding: 20px 0;
+  color: var(--white);
+}
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+nav ul {
+  display: flex;
+  gap: 20px;
+}
+nav a {
+  font-weight: 500;
+  color: var(--white);
+}
+.social a {
+  margin-left: 10px;
+  font-size: 1rem;
+  color: var(--white);
+}
+/* Buttons */
+.btn {
+  padding: 12px 30px;
+  border-radius: 4px;
+  font-weight: 700;
+  margin: 0 10px;
+  display: inline-block;
+}
+.btn-primary {
+  background: var(--orange);
+  color: var(--white);
+}
+.btn-secondary {
+  background: var(--white);
+  color: var(--blue);
+}
+/* Hero */
+.hero {
+  background: var(--blue);
+  color: var(--white);
+  padding: 80px 0;
+  position: relative;
+}
+.hero-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.hero-text {
+  flex: 1;
+  min-width: 280px;
+}
+.hero-text h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+.hero-subtitle {
+  margin-bottom: 20px;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+.hero-mockup {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+.hero-mockup img {
+  width: 280px;
+  box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+  border-radius: 20px;
+}
+/* Decorative circles */
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+.circle.small { width: 40px; height: 40px; }
+.circle.medium { width: 60px; height: 60px; }
+.circle.large { width: 100px; height: 100px; }
+.circle.orange { background: var(--orange); }
+.circle.yellow { background: var(--yellow); }
+.circle.blue-dark { background: #3d6be6; }
+
+/* Features */
+.features {
+  padding: 80px 0;
+  text-align: center;
+}
+.features h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+.feature-items {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.feature {
+  width: 260px;
+  padding: 20px;
+}
+.feature-icon {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+.feature h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+.feature p {
+  color: var(--gray);
+}
+
+/* Carousel Slider */
+.carousel-slider {
+  perspective: 1200px;
+  position: relative;
+  height: 440px;
+  margin-bottom: 100px;
+}
+.carousel-images {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 40px 0;
+}
+
+.carousel-images img {
+  flex-shrink: 0;
+  width: 300px;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Detailed Screenshots */
+.screenshots {
+  padding: 80px 0;
+}
+.screenshot {
+  display: flex;
+  align-items: center;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
+}
+.screenshot:nth-child(even) {
+  flex-direction: row-reverse;
+}
+.screenshot .phone {
+  width: 180px;
+  margin: 0 20px;
+}
+.desc {
+  flex: 1;
+  padding: 20px;
+}
+.screenshot-icon {
+  width: 40px;
+  margin-bottom: 10px;
+  display: block;
+}
+.desc h3 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+.desc p {
+  color: var(--gray);
+}
+
+/* Reviews */
+.reviews {
+  padding: 60px 0;
+  background: var(--light-gray);
+  text-align: center;
+}
+.reviews h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+.review-items {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.review {
+  width: 260px;
+  padding: 20px;
+  background: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+.quote {
+  font-style: italic;
+  margin-bottom: 15px;
+}
+.author {
+  font-weight: 700;
+}
+
+/* CTA & Footer */
+.cta {
+  padding: 60px 0;
+  background: var(--blue);
+  color: var(--white);
+  text-align: center;
+}
+.cta h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+.store-badges img {
+  width: 140px;
+  margin: 0 10px;
+}
+footer {
+  background: var(--dark);
+  color: var(--white);
+  padding: 20px 0;
+  text-align: center;
+}
+footer p {
+  font-size: 0.9rem;
+}
