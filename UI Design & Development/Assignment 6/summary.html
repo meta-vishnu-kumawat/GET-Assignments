@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registration Summary</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Employee Summary</h1>
+  <div class="form-container">
+    <p><strong>Name:</strong> <span id="sum-name"></span></p>
+    <p><strong>Gender:</strong> <span id="sum-gender"></span></p>
+    <p><strong>Email:</strong> <span id="sum-email"></span></p>
+    <p><strong>Contact:</strong> <span id="sum-contact"></span></p>
+    <p><strong>Registration ID:</strong> <span id="sum-regId"></span></p>
+    <button onclick="window.history.back()">Back</button>
+  </div>
+  <script>
+    // Load stored employee data
+    const emp = JSON.parse(localStorage.getItem('employeeData') || '{}');
+    document.getElementById('sum-name').textContent = emp.fullName || '';
+    document.getElementById('sum-gender').textContent = emp.gender || '';
+    document.getElementById('sum-email').textContent = emp.email || '';
+    document.getElementById('sum-contact').textContent = emp.contact || '';
+    document.getElementById('sum-regId').textContent = emp.regId || '';
+  </script>
+</body>
+</html>
