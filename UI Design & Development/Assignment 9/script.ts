@@ -5,7 +5,7 @@ const showAlert = (message: string): void => alert(message);
 const steps: HTMLElement[] = Array.from(document.querySelectorAll(".step"));
 const tabs: NodeListOf<HTMLLIElement> = document.querySelectorAll(".tabs li");
 
-let currentStep: number = 0;
+let currentStep = 0;
 
 const showStep = (idx: number): void => {
   steps.forEach((s, i) => s.classList.toggle("hidden", i !== idx));
@@ -13,7 +13,15 @@ const showStep = (idx: number): void => {
 };
 
 // Validation regex patterns
-const patterns: Record<string, RegExp> = {
+interface ValidationPatterns {
+  name: RegExp;
+  email: RegExp;
+  password: RegExp;
+  contact: RegExp;
+  vehicleNum: RegExp;
+}
+
+const patterns: ValidationPatterns = {
   name: /^[A-Za-z]{2,}(?: [A-Za-z]+)*$/,
   email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/,
   password: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\s]).{8,}$/,
@@ -29,23 +37,25 @@ const validateAndNext = (step: number): void => {
   const ids: string[] = ["fullName", "gender", "email", "password", "confirmPassword", "contact"];
   const fid: string = ids[step - 1];
 
-  let valid: boolean = false;
+  let valid = false;
 
   if (fid === "gender") {
     valid = !!document.querySelector('input[name="gender"]:checked');
     if (!valid) showAlert("Select your gender.");
   } else if (fid === "confirmPassword") {
-    const pw: string = (document.getElementById("password") as HTMLInputElement).value;
-    const cpw: string = (document.getElementById("confirmPassword") as HTMLInputElement).value;
+    const pw = (document.getElementById("password") as HTMLInputElement).value;
+    const cpw = (document.getElementById("confirmPassword") as HTMLInputElement).value;
     if (cpw !== pw) showAlert("Passwords must match.");
     else valid = patterns.password.test(cpw);
   } else {
-    const inp: HTMLInputElement | null = document.getElementById(fid) as HTMLInputElement;
-    const key: string = fid === "fullName" ? "name" : fid;
+    const inp = document.getElementById(fid) as HTMLInputElement;
+    const key: keyof ValidationPatterns = fid === "fullName" ? "name" : fid as keyof ValidationPatterns;
+
     if (!patterns[key]) {
       console.error(`Validation pattern for ${key} is missing.`);
       return;
     }
+
     valid = patterns[key].test(inp.value.trim());
     if (!valid) showAlert(`Invalid ${fid}.`);
   }
@@ -62,8 +72,8 @@ const validateAndNext = (step: number): void => {
 
 const updateTabs = (): void => {
   tabs.forEach(t => t.classList.remove("active"));
-  const id: string = steps[currentStep].id;
-  const section: string = id.startsWith("step-v") ? "vehicle" :
+  const id = steps[currentStep]?.id || "";
+  const section = id.startsWith("step-v") ? "vehicle" :
     id.startsWith("step-pass") ? "pass" : "employee";
 
   document.querySelector(`.tabs li[data-step="${section}"]`)?.classList.add("active");
@@ -82,13 +92,13 @@ for (let i = 1; i <= 6; i++) {
 
 // Submit employee and generate ID
 const validateAndSubmitEmployee = (): void => {
-  const contactVal: string = (document.getElementById("contact") as HTMLInputElement).value.trim();
+  const contactVal = (document.getElementById("contact") as HTMLInputElement).value.trim();
   if (!patterns.contact.test(contactVal)) {
     showAlert("Contact number must be at least 10 digits.");
     return;
   }
 
-  const id: string = `EMP-${Math.floor(Math.random() * 90000 + 10000)}`;
+  const id = `EMP-${Math.floor(Math.random() * 90000 + 10000)}`;
   (document.getElementById("regId") as HTMLElement).textContent = id;
   (document.getElementById("employeeId") as HTMLInputElement).value = id;
 
