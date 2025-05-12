@@ -30,11 +30,17 @@
       </div>
 
       <div class="step hidden" id="step-2">
-        <p id="greeting">Hi! Can I know your gender?</p>
-        <label><input type="radio" name="gender" value="Male" required /> Male</label>
-        <label><input type="radio" name="gender" value="Female" /> Female</label>
-        <label><input type="radio" name="gender" value="Other" /> Other</label>
-        <div class="buttons">
+        <p id="greeting">Hi! Please select your gender:</p>
+
+        <div style="display: flex; gap: 20px; align-items: center;">
+            <label for="male">
+                <input type="radio" id="male" name="gender" value="Male" required /> Male
+            </label>
+            <label for="female">
+                <input type="radio" id="female" name="gender" value="Female" /> Female
+            </label>
+            
+        </div>
           <button type="button" id="prev-2">Previous</button>
           <button type="button" id="next-2">Next</button>
         </div>

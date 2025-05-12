@@ -89,14 +89,14 @@ const TaskManager = () => {
   const allowDrop = (e) => e.preventDefault();
 
   
+ 
   const getPriorityColor = (priority) => {
     switch (priority) {
-      case "High": return "#B68F40"; 
-      case "Medium": return "#FF9F1C"; 
-      case "Low": return "#2EC4B6"; 
-      default: return "#6C757D"; 
+      case "High": return "#FF6B6B"; // Light red for high priority
+      case "Medium": return "#4ECDC4"; // Aqua for medium priority
+      case "Low": return "#5E60CE"; // Blue for low priority
+      default: return "#6C757D"; // Neutral gray for undefined priority
     }
-    
   };
 
   return (
