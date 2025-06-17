@@ -1,0 +1,247 @@
+/* style.css / / RESET & GLOBAL */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: #177dfb;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background: #177dfb;
+}
+
+.section {
+    padding: 4rem 0;
+}
+
+
+/* Navbar */
+.navbar {
+    background: #ffffffcc;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #177dfb;
+    text-decoration: none;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+}
+
+.nav-menu li {
+    margin-left: 1.5rem;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-menu a:hover {
+    color: #005b96;
+}
+
+/* Hero */
+.hero {
+    background: url(/Html/6.jpg) no-repeat center/cover;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-top: 60px;
+  
+}
+
+.hero .overlay {
+    background-color:#005b96;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    color: #fff;
+
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero p {
+    font-size: 1.1rem;
+}
+
+/* Forms */
+.form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.form label {
+    grid-column: span 2;
+    font-weight: 600;
+}
+
+.form input,
+.form select,
+.form textarea {
+    grid-column: span 2;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form textarea {
+    resize: vertical;
+}
+
+.radio-group {
+    grid-column: span 2;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.employee-section .btn,
+.vehicle-section .btn {
+    grid-column: span 2;
+    justify-self: start;
+}
+
+/* Feedback */
+.feedback-section .feedback-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 2rem;
+    background: #f9f9f9;
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.feedback-info h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.feedback-form input,
+.feedback-form textarea {
+    width: 100%;
+}
+
+.feedback-form .btn {
+    grid-column: span 2;
+}
+
+/* Pricing */
+.pricing-section .pricing-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background: #fff;
+    border: 2px solid #177dfb;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+}
+
+.card h3 {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+}
+
+.price-circle {
+    border: 2px solid #177dfb;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    position: relative;
+}
+
+.price-circle .amount {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.price-circle small {
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+    font-size: 0.75rem;
+}
+
+.price-list {
+    list-style: none;
+    margin-bottom: 1rem;
+}
+
+.price-list li {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+}
+
+/* Footer */
+.footer {
+    background: #177dfb;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.footer p {
+    font-size: 0.9rem;
+}

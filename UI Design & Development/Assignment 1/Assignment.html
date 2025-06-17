@@ -1,0 +1,175 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metacube Parking System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <img src="LogoMetacube.png" alt="Metacube Parking logo"></a>
+            <ul class="nav-menu">
+                <li><a href="#employee">Add Employee</a></li>
+                <li><a href="#vehicle">Add Vehicle</a></li>
+                <li><a href="#feedback">Give Feedback</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+            </ul>
+        </div>
+    </nav> <!-- Hero / Cover Section -->
+    <header class="hero">
+        <div class="overlay">
+            <h1>Welcome to Metacube Parking System</h1>
+            <p>Your trusted parking management solution</p>
+        </div>
+    </header> <!-- Employee Section -->
+    <section id="employee" class="section employee-section">
+        <div class="container">
+            <h2>Employee Details</h2>
+            <form class="form" action="#" method="post">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" required
+                    placeholder="Enter full name"><label>Gender</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="gender" value="male" required> Male</label>
+                    <label><input type="radio" name="gender" value="female"> Female</label>
+                    <label><input type="radio" name="gender" value="other"> Other</label>
+                </div>
+
+                <label for="email">Email Id</label>
+                <input type="email" id="email" name="email" required placeholder="Enter email">
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required minlength="6"
+                    placeholder="Enter password">
+
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6"
+                    placeholder="Confirm password">
+
+                <label for="contact">Contact Number</label>
+                <input type="tel" id="contact" name="contact" required pattern="[0-9]{10}"
+                    placeholder="10-digit number">
+
+                <button type="submit" class="btn">Submit Employee</button>
+            </form>
+        </div>
+
+    </section> <!-- Vehicle Section -->
+    <section id="vehicle" class="section vehicle-section">
+        <div class="container">
+            <h2>Vehicle Details</h2>
+            <form class="form" action="#" method="post">
+                <label for="make">Vehicle Make (Company)</label>
+                <input type="text" id="make" name="make" required placeholder="Enter vehicle make"><label
+                    for="model">Vehicle Model</label>
+                <input type="text" id="model" name="model" required placeholder="Enter vehicle model">
+
+                <label for="type">Type</label>
+                <select id="type" name="type" required>
+                    <option value="" disabled selected>Select type</option>
+                    <option value="cycle">Cycle</option>
+                    <option value="motorcycle">Motorcycle</option>
+                    <option value="fourwheeler">Four Wheeler</option>
+                </select>
+
+                <label for="vehicleNumber">Vehicle Number</label>
+                <input type="text" id="vehicleNumber" name="vehicleNumber" required placeholder="Enter vehicle number">
+
+                <label for="employeeId">Employee Id</label>
+                <input type="text" id="employeeId" name="employeeId" required placeholder="Enter employee ID">
+
+                <label for="identification">Identification (Color, mark, visible accessory etc.)</label>
+                <textarea id="identification" name="identification" rows="3" required
+                    placeholder="Describe identifying features"></textarea>
+
+                <button type="submit" class="btn">Submit Vehicle</button>
+            </form>
+        </div>
+
+    </section> <!-- Feedback Section -->
+    <section id="feedback" class="section feedback-section">
+        <div class="container feedback-container">
+            <div class="feedback-info">
+                <h2>Get in Touch</h2>
+                <p>We value your feedback and suggestions.</p>
+            </div>
+            <form class="form feedback-form" action="#" method="post">
+                <label for="fbName">Name</label>
+                <input type="text" id="fbName" name="fbName" required placeholder="Your name"><label
+                    for="fbEmail">Email</label>
+                <input type="email" id="fbEmail" name="fbEmail" required placeholder="Your email">
+
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" required placeholder="Subject">
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="4" required
+                    placeholder="Write your feedback here..."></textarea>
+
+                <button type="submit" class="btn">Send Email →</button>
+            </form>
+        </div>
+
+    </section> <!-- Pricing Section -->
+    <section id="pricing" class="section pricing-section">
+        <div class="container">
+            <h2>Pricing</h2>
+            <div class="pricing-cards">
+                <!-- Cycle -->
+                <div class="card">
+                    <h3>Cycle</h3>
+                    <div class="price-circle">
+                        <span class="amount">$5</span><small>/daily</small>
+                    </div>
+                    <ul class="price-list">
+                        <li>$5 Daily</li>
+                        <li>$100 Monthly</li>
+                        <li>$500 Yearly</li>
+                    </ul>
+                    <button class="btn">Purchase Now</button>
+                </div>
+                <!-- Motorcycle -->
+                <div class="card">
+                    <h3>Motorcycle</nobr>
+                    </h3>
+                    <div class="price-circle">
+                        <span class="amount">$10</span><small>/daily</small>
+                    </div>
+                    <ul class="price-list">
+                        <li>$10 Daily</li>
+                        <li>$200 Monthly</li>
+                        <li>$1000 Yearly</li>
+                    </ul>
+                    <button class="btn">Purchase Now</button>
+                </div>
+                <!-- Four Wheeler -->
+                <div class="card">
+                    <h3>Four Wheeler</h3>
+                    <div class="price-circle">
+                        <span class="amount">$20</span><small>/daily</small>
+                    </div>
+                    <ul class="price-list">
+                        <li>$20 Daily</li>
+                        <li>$500 Monthly</li>
+                        <li>$3500 Yearly</li>
+                    </ul>
+                    <button class="btn">Purchase Now</button>
+                </div>
+            </div>
+        </div>
+    </section> <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Metacube Parking System. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
