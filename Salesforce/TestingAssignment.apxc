@@ -1,0 +1,105 @@
+// Test Class
+@isTest
+private class TestRestrictContactByName {
+    @isTest
+    static void testInsertValidContact() {
+        Contact validContact = new Contact(LastName = 'ValidName');
+        Test.startTest();
+        insert validContact;
+        Test.stopTest();
+        Contact insertedContact = [SELECT LastName FROM Contact WHERE Id = :validContact.Id];
+        System.assertEquals('ValidName', insertedContact.LastName);
+    }
+
+    @isTest
+    static void testInsertInvalidContact() {
+        Contact invalidContact = new Contact(LastName = 'INVALIDNAME');
+        Test.startTest();
+        try {
+            insert invalidContact;
+        } catch (DmlException e) {
+            System.assert(e.getMessage().contains('Last name cannot be INVALIDNAME'), 'Error message mismatch');
+        }
+        Test.stopTest();
+    }
+
+    @isTest
+    static void testUpdateValidToValidContact() {
+        Contact validContact = new Contact(LastName = 'InitialName');
+        insert validContact;
+        validContact.LastName = 'UpdatedName';
+        Test.startTest();
+        update validContact;
+        Test.stopTest();
+        Contact updatedContact = [SELECT LastName FROM Contact WHERE Id = :validContact.Id];
+        System.assertEquals('UpdatedName', updatedContact.LastName);
+    }
+
+    @isTest
+    static void testUpdateValidToInvalidContact() {
+        Contact validContact = new Contact(LastName = 'InitialName');
+        insert validContact;
+        validContact.LastName = 'INVALIDNAME';
+        Test.startTest();
+        try {
+            update validContact;
+        } catch (DmlException e) {
+            System.assert(e.getMessage().contains('Last name cannot be INVALIDNAME'), 'Error message mismatch');
+        }
+        Test.stopTest();
+    }
+
+    @isTest
+    static void testUpdateInvalidToValidContact() {
+        Contact invalidContact = new Contact(LastName = 'INVALIDNAME');
+        insert invalidContact;
+        invalidContact.LastName = 'ValidName';
+        Test.startTest();
+        try {
+           update invalidContact;
+        } catch (DmlException e) {
+            System.assert(e.getMessage().contains('Last name cannot be INVALIDNAME'), 'Error message mismatch');
+        }
+        Test.stopTest();
+    }
+
+    @isTest
+    static void testUpdateInvalidToInvalidContact() {
+        Contact invalidContact = new Contact(LastName = 'INVALIDNAME');
+        insert invalidContact;
+        invalidContact.LastName = 'INVALIDNAME';
+        Test.startTest();
+        try {
+            update invalidContact;
+        } catch (DmlException e) {
+            System.assert(e.getMessage().contains('Last name cannot be INVALIDNAME'), 'Error message mismatch');
+        }
+        Test.stopTest();
+    }
+}
+
+
+//Verify Date Test
+@isTest 
+private class TestVerifyDate { 
+    //testing that if date2 is within 30 days of date1, should return date 2
+     @isTest static void testDate2within30daysofDate1() {
+         Date date1 = date.newInstance(2018, 03, 20);
+         Date date2 = date.newInstance(2018, 04, 11);
+         Date resultDate = VerifyDate.CheckDates(date1,date2);
+         Date testDate = Date.newInstance(2018, 04, 11);
+         System.assertEquals(testDate,resultDate); }
+    //testing that date2 is before date1. Should return "false"
+     @isTest static void testDate2beforeDate1() {
+         Date date1 = date.newInstance(2018, 03, 20);
+         Date date2 = date.newInstance(2018, 02, 11);
+         Date resultDate = VerifyDate.CheckDates(date1,date2);
+         Date testDate = Date.newInstance(2018, 02, 11);
+         System.assertNotEquals(testDate, resultDate); }
+    //Test date2 is outside 30 days of date1. Should return end of month.
+     @isTest static void testDate2outside30daysofDate1() {
+         Date date1 = date.newInstance(2018, 03, 20);
+         Date date2 = date.newInstance(2018, 04, 25);
+         Date resultDate = VerifyDate.CheckDates(date1,date2);
+         Date testDate = Date.newInstance(2018, 03, 31);
+         System.assertEquals(testDate,resultDate); } }

@@ -12,25 +12,16 @@
  *         - OrderItem Status (as OrderStatus)
  *      Results are ordered by OrderDate descending.
  */
-CREATE OR REPLACE VIEW OrderInfo AS
-SELECT 
-    o.OrderID,
-    p.Name AS ProductName,
-    p.Price,
-    u.Username AS ShopperName,
-    u.Email,
-    o.OrderDate,
-    oi.Status AS OrderStatus
-FROM OrderTable o
-JOIN OrderItem oi ON o.OrderID = oi.OrderID
-JOIN Product p ON oi.ProductID = p.ProductID
-JOIN User u ON o.ShopperID = u.UserID
-WHERE o.OrderDate >= (NOW() - INTERVAL 60 DAY)
-ORDER BY o.OrderDate DESC;
+
+ CREATE VIEW OrderDeatils AS
+ SELECT OrderID,ProductName,Price,ShopperName,Email,OrderDate,OrderStatus
+ FROM OrderInfo WHERE OrderDate >= (NOW() - INTERVAL 60 DAY)
+ ORDER BY OrderDate DESC;
+ SELECT * FROM OrderDeatils;
 
 -- 5.2: Use the view to display the products (items) which are in 'Shipped' state.
 SELECT *
-FROM OrderInfo
+FROM OrderDeatils
 WHERE OrderStatus = 'Shipped';
 
 -- 5.3: Use the view to display the top 5 most selling products.
@@ -38,7 +29,9 @@ WHERE OrderStatus = 'Shipped';
 SELECT 
     ProductName, 
     COUNT(*) AS SoldCount
-FROM OrderInfo
+FROM OrderDeatils
 GROUP BY ProductName
 ORDER BY SoldCount DESC
 LIMIT 5;
+
+
