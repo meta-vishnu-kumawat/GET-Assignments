@@ -1,22 +1,52 @@
 <template>
-    <lightning-card title="Contact Manager" icon-name="standard:contact">
-      
-      <div class="slds-p-horizontal_medium">
-        <lightning-input label="Name" value={contactRecord.Name} onchange={handleInputChange} name="Name"></lightning-input>
-        <lightning-input label="Phone" value={contactRecord.Phone} onchange={handleInputChange} name="Phone"></lightning-input>
-        <lightning-input label="Email" value={contactRecord.Email} onchange={handleInputChange} name="Email"></lightning-input>
-        <lightning-button label="Create" variant="brand" onclick={createContact}></lightning-button>
-      </div>
-  
-      <br/>
-  
-     
-      <lightning-datatable
-        key-field="Id"
-        data={contacts}
-        columns={columns}
-        onrowaction={handleRowAction}>
-      </lightning-datatable>
-    </lightning-card>
-  </template>
-  
+  <lightning-card title="Contact Manager" icon-name="standard:contact">
+    <!-- Contact Form -->
+    <div class="slds-p-horizontal_medium">
+      <lightning-input
+        label="First Name"
+        name="FirstName"
+        value={contactRecord.FirstName}
+        onchange={handleInputChange}>
+      </lightning-input>
+
+      <lightning-input
+        label="Last Name"
+        name="LastName"
+        value={contactRecord.LastName}
+        onchange={handleInputChange}
+        required>
+      </lightning-input>
+
+      <lightning-input
+        label="Phone"
+        name="Phone"
+        value={contactRecord.Phone}
+        onchange={handleInputChange}>
+      </lightning-input>
+
+      <lightning-input
+        label="Email"
+        name="Email"
+        value={contactRecord.Email}
+        onchange={handleInputChange}>
+      </lightning-input>
+
+      <lightning-button
+        label="Create"
+        variant="brand"
+        onclick={createContact}
+        class="slds-m-top_medium">
+      </lightning-button>
+    </div>
+
+    <br/>
+
+    <!-- Contact Table -->
+    <lightning-datatable
+      key-field="Id"
+      data={contacts}
+      columns={columns}
+      onrowaction={handleRowAction}>
+    </lightning-datatable>
+  </lightning-card>
+</template>

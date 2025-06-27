@@ -4,10 +4,18 @@ import createContactRecord from '@salesforce/apex/ContactController.createContac
 import updateContactRecord from '@salesforce/apex/ContactController.updateContact';
 import deleteContactRecord from '@salesforce/apex/ContactController.deleteContact';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { refreshApex } from '@salesforce/apex';
 
 export default class ContactManager extends LightningElement {
   @track contacts = [];
-  @track contactRecord = { Name: '', Phone: '', Email: '' };
+  @track contactRecord = {
+    FirstName: '',
+    LastName: '',
+    Phone: '',
+    Email: ''
+  };
+
+  wiredContactsResult;
 
   columns = [
     { label: 'Name', fieldName: 'Name' },
@@ -24,7 +32,9 @@ export default class ContactManager extends LightningElement {
   ];
 
   @wire(getContacts)
-  wiredContacts({ data, error }) {
+  wiredContacts(result) {
+    this.wiredContactsResult = result;
+    const { data, error } = result;
     if (data) {
       this.contacts = data;
     } else if (error) {
@@ -38,14 +48,20 @@ export default class ContactManager extends LightningElement {
   }
 
   createContact() {
+    // Validate LastName before sending to Apex (required field)
+    if (!this.contactRecord.LastName) {
+      this.showToast('Validation Error', 'Last Name is required', 'warning');
+      return;
+    }
+
     createContactRecord({ contact: this.contactRecord })
-      .then(() => {
+      .then(result => {
         this.showToast('Success', 'Contact Created', 'success');
-        this.contactRecord = { Name: '', Phone: '', Email: '' };
-        return refreshApex(this.contacts);
+        this.contactRecord = { FirstName: '', LastName: '', Phone: '', Email: '' };
+        return refreshApex(this.wiredContactsResult);
       })
       .catch(error => {
-        this.showToast('Error creating contact', error.body.message, 'error');
+        this.showToast('Error creating contact', error.body.message || error.message, 'error');
       });
   }
 
@@ -54,32 +70,43 @@ export default class ContactManager extends LightningElement {
     const row = event.detail.row;
 
     if (action === 'edit') {
-      const updatedName = prompt('Enter new name:', row.Name);
-      const updatedPhone = prompt('Enter new phone:', row.Phone);
-      const updatedEmail = prompt('Enter new email:', row.Email);
-      const updatedContact = { ...row, Name: updatedName, Phone: updatedPhone, Email: updatedEmail };
+      const updatedFirstName = prompt('Enter First Name:', row.FirstName || '');
+      const updatedLastName = prompt('Enter Last Name:', row.LastName || '');
+      const updatedPhone = prompt('Enter Phone:', row.Phone || '');
+      const updatedEmail = prompt('Enter Email:', row.Email || '');
+
+      if (!updatedLastName) {
+        this.showToast('Validation Error', 'Last Name is required', 'warning');
+        return;
+      }
+
+      const updatedContact = {
+        Id: row.Id,
+        FirstName: updatedFirstName,
+        LastName: updatedLastName,
+        Phone: updatedPhone,
+        Email: updatedEmail
+      };
 
       updateContactRecord({ contact: updatedContact })
         .then(() => {
           this.showToast('Updated', 'Contact updated', 'success');
-          return refreshApex(this.contacts);
+          return refreshApex(this.wiredContactsResult);
         })
-        .catch(error => this.showToast('Error', error.body.message, 'error'));
+        .catch(error => this.showToast('Error', error.body.message || error.message, 'error'));
     }
 
     if (action === 'delete') {
       deleteContactRecord({ contactId: row.Id })
         .then(() => {
           this.showToast('Deleted', 'Contact deleted', 'success');
-          return refreshApex(this.contacts);
+          return refreshApex(this.wiredContactsResult);
         })
-        .catch(error => this.showToast('Error', error.body.message, 'error'));
+        .catch(error => this.showToast('Error', error.body.message || error.message, 'error'));
     }
   }
 
   showToast(title, message, variant) {
-    this.dispatchEvent(
-      new ShowToastEvent({ title, message, variant })
-    );
+    this.dispatchEvent(new ShowToastEvent({ title, message, variant }));
   }
 }
