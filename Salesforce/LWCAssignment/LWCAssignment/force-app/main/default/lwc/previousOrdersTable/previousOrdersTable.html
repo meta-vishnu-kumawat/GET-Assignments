@@ -1,0 +1,33 @@
+
+<template>
+    <lightning-card title="Previous Purchase Orders">
+        <table class="slds-table slds-table_bordered">
+            <thead>
+                <tr>
+                    <th>
+                        <a href="javascript:void(0);" data-field="Name" onclick={handleSort}>
+                            Order Name
+                        </a>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0);" data-field="CreatedDate" onclick={handleSort}>
+                            Date
+                        </a>
+                    </th>
+                    <th>Status</th>
+                    <th>Total Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={sortedData} for:item="order">
+                    <tr key={order.Id}>
+                        <td>{order.Name}</td>
+                        <td>{order.CreatedDate}</td>
+                        <td>{order.Status__c}</td>
+                        <td>{order.TotalAmount__c}</td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+    </lightning-card>
+</template>

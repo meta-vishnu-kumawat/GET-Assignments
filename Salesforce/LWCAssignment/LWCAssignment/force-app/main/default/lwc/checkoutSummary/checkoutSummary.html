@@ -1,0 +1,17 @@
+<template>
+    <lightning-card title="Checkout Summary">
+        <lightning-datatable
+            key-field="Product2Id"
+            data={cartItemsWithTotal}
+            columns={columns}>
+        </lightning-datatable>
+
+        <div class="slds-p-top_medium slds-text-align_right">
+            <strong>Total Amount: ₹ {totalAmount}</strong>
+        </div>
+
+        <div class="slds-m-top_medium">
+            <lightning-button variant="brand" label="Place Order" onclick={handlePlaceOrder}></lightning-button>
+        </div>
+    </lightning-card>
+</template>

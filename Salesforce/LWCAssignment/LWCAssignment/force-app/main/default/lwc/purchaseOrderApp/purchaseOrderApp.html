@@ -1,0 +1,41 @@
+<template>
+    <lightning-card title="Shopping Cart Application">
+        <template if:true={hasPreviousOrders}>
+            <c-previous-orders-table
+                records={previousOrders}
+                onorderselected={handleOrderSelected}>
+            </c-previous-orders-table>
+        </template>
+    
+        <div class="slds-m-top_medium">
+            <lightning-button label="Add New Purchase Order" onclick={startNewOrder}></lightning-button>
+        </div>
+    
+       
+        <template if:true={showProductTable}>
+            <c-product-table
+                products={availableProducts}
+                onaddtocart={handleAddToCart}>
+            </c-product-table>
+        </template>
+    
+        <!-- Cart Section -->
+        <template if:true={cartVisible}>
+            <c-cart-details
+                cart-items={cartItems}
+                onquantitychange={handleQuantityChange}
+                ondeleteitem={handleDeleteItem}
+                oncheckout={handleCheckout}>
+            </c-cart-details>
+        </template>
+    
+        <!-- Checkout Summary Section -->
+        <template if:true={showCheckout}>
+            <c-checkout-summary
+                cart-items={cartItems}
+                onplaceorder={handlePlaceOrder}>
+            </c-checkout-summary>
+        </template>
+    </lightning-card>
+    
+    </template>

@@ -1,0 +1,47 @@
+<template>
+    <lightning-card title="Your Cart">
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+            <thead>
+                <tr>
+                    <th>Product Code</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <template for:each={cartItemsWithTotal} for:item="item">
+                    <tr key={item.Product2Id}>
+                        <td>{item.ProductCode}</td>
+                        <td>{item.Name}</td>
+                        <td>{item.Price__c}</td>
+                        <td>
+                            <lightning-input type="number" min="1" value={item.Quantity}
+                                             data-id={item.Product2Id}
+                                             onchange={handleQuantityChange}>
+                            </lightning-input>
+                        </td>
+                        <td>{item.itemTotal}</td>
+                        <td>
+                            <lightning-button-icon icon-name="utility:delete"
+                                                   alternative-text="Delete"
+                                                   data-id={item.Product2Id}
+                                                   onclick={handleDelete}>
+                            </lightning-button-icon>
+                        </td>
+                    </tr>
+                </template>
+            </tbody>
+        </table>
+
+        <div class="slds-p-top_medium slds-text-align_right">
+            <strong>Total Amount: ₹ {totalAmount}</strong>
+        </div>
+
+        <div class="slds-m-top_medium slds-text-align_right">
+            <lightning-button variant="brand" label="Checkout" onclick={handleCheckout}></lightning-button>
+        </div>
+    </lightning-card>
+</template>
