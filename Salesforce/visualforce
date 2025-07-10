@@ -1,0 +1,33 @@
+<apex:page controller="ManageClassController">
+    <apex:form id="classForm">
+        <apex:pageBlock title="Available Classes">
+            <apex:pageBlockTable value="{!classList}" var="cls">
+                <apex:column value="{!cls.Name}" />
+                <apex:column value="{!cls.Subject__c}" />
+                <apex:column value="{!cls.User__c}" />
+                <apex:column >
+                    <apex:commandLink value="Edit" action="{!editClass}" reRender="editSection">
+                        <apex:param name="classId" value="{!cls.Id}" assignTo="{!selectedClassId}" />
+                    </apex:commandLink>
+                    &nbsp;|&nbsp;
+                    <apex:commandLink value="Delete" action="{!deleteClass}" reRender="classForm">
+                        <apex:param name="classId" value="{!cls.Id}" assignTo="{!selectedClassId}" />
+                    </apex:commandLink>
+                </apex:column>
+            </apex:pageBlockTable>
+
+            <apex:outputPanel id="editSection">
+                <apex:actionRegion >
+                    <apex:outputPanel rendered="{!NOT(ISNULL(editClassObj))}">
+                        <apex:pageBlock title="Edit Class">
+                            <apex:inputField value="{!editClassObj.Name}" />
+                            <apex:inputField value="{!editClassObj.Subject__c}" />
+                            <apex:inputField value="{!editClassObj.User__c}" />
+                            <apex:commandButton value="Save" action="{!saveClass}" reRender="classForm,editSection"/>
+                        </apex:pageBlock>
+                    </apex:outputPanel>
+                </apex:actionRegion>
+            </apex:outputPanel>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
