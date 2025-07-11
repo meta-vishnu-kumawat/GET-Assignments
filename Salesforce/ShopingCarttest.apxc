@@ -1,0 +1,64 @@
+@IsTest
+private class PO_ServiceTest {
+
+  
+    @IsTest
+    static void testPlaceOrder_withValidPayload() {
+        
+        Product2 product = new Product2(Name='Test Product', ProductCode='TP001', isActive=true);
+        insert product;
+
+        
+        List<Map<String, Object>> cartItems = new List<Map<String, Object>>{
+            new Map<String, Object>{
+                'productId' => product.Id,
+                'quantity' => 2,
+                'price' => 500.0
+            }
+        };
+        String jsonInput = JSON.serialize(cartItems);
+
+               Test.startTest();
+        PO_Service.placeOrder(jsonInput);
+        Test.stopTest();
+
+      
+        List<Purchase_Order__c> orders = [SELECT Id, Total_Amount__c FROM Purchase_Order__c];
+        System.assertEquals(1, orders.size(), 'One order should be created');
+        System.assertEquals(1000.0, orders[0].Total_Amount__c, 'Total amount should be quantity * price');
+
+        List<Purchase_Order_Line_Item__c> lineItems = [
+            SELECT Product__c, Quantity__c, Price__c FROM Purchase_Order_Line_Item__c
+        ];
+        System.assertEquals(1, lineItems.size(), 'One line item should be created');
+        System.assertEquals(product.Id, lineItems[0].Product__c, 'Product ID should match');
+        System.assertEquals(2, lineItems[0].Quantity__c, 'Quantity should match');
+        System.assertEquals(500.0, lineItems[0].Price__c, 'Price should match');
+    }
+
+    @IsTest
+    static void testPlaceOrder_withInvalidJSON() {
+        Test.startTest();
+        try {
+            PO_Service.placeOrder(null);
+            System.assert(false, 'Expected exception for null input');
+        } catch (Exception e) {
+            System.assert(e.getMessage().contains('null'), 'Should throw null input error');
+        }
+        Test.stopTest();
+    }
+
+    @IsTest
+    static void testPlaceOrder_withEmptyCart() {
+        String emptyCart = JSON.serialize(new List<Map<String, Object>>());
+
+        Test.startTest();
+        PO_Service.placeOrder(emptyCart);
+        Test.stopTest();
+
+        List<Purchase_Order__c> orders = [SELECT Id FROM Purchase_Order__c];
+        System.assertEquals(1, orders.size(), 'Should still create an empty purchase order');
+        List<Purchase_Order_Line_Item__c> lines = [SELECT Id FROM Purchase_Order_Line_Item__c];
+        System.assertEquals(0, lines.size(), 'No line items expected');
+    }
+}
