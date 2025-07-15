@@ -1,0 +1,69 @@
+1 :-
+
+trigger AccountTestTrigger on Account (after insert, after update) {
+    Set<Id> acctIds = new Set<Id>();
+    for (Account a : Trigger.new) {
+        acctIds.add(a.Id);
+    }
+    
+    List<Contact> contactsToUpdate = [
+        SELECT Id, Salutation, FirstName, LastName
+        FROM Contact
+        WHERE AccountId IN :acctIds
+    ];
+    
+    for (Contact c : contactsToUpdate) {
+        c.Description = String.join(
+            new List<String>{ c.Salutation, c.FirstName, c.LastName }, 
+            ' '
+        );
+    }
+    
+    if (!contactsToUpdate.isEmpty()) {
+        update contactsToUpdate;
+    }
+}
+
+trigger AccountTrigger on Account (
+    before insert,
+    before update,
+    before delete
+) {
+    Set<Id> acctIds = Trigger.isDelete
+        ? Trigger.oldMap.keySet()
+        : Trigger.newMap.keySet();
+    
+    if (acctIds.isEmpty()) {
+        return;
+    }
+    
+    List<Opportunity> allOpps = [
+        SELECT Id, AccountId, StageName
+        FROM Opportunity
+        WHERE AccountId IN :acctIds
+          AND StageName IN ('Closed - Lost', 'Closed - Won')
+    ];
+    
+    Map<Id, List<Opportunity>> oppsByAcct = new Map<Id, List<Opportunity>>();
+    for (Opportunity o : allOpps) {
+        if (!oppsByAcct.containsKey(o.AccountId)) {
+            oppsByAcct.put(o.AccountId, new List<Opportunity>());
+        }
+        oppsByAcct.get(o.AccountId).add(o);
+    }
+    
+    for (Account a : Trigger.isDelete ? Trigger.old : Trigger.new) {
+        List<Opportunity> relatedOpps = oppsByAcct.get(a.Id);
+        if (relatedOpps == null) {
+            continue;
+        }
+        
+        for (Opportunity o : relatedOpps) {
+            if (o.StageName == 'Closed - Lost') {
+                System.debug('Logic for Closed-Lost opp on Account ' + a.Id);
+            } else {
+                System.debug('Logic for Closed-Won opp on Account ' + a.Id);
+            }
+        }
+    }
+}
