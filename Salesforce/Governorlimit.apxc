@@ -1,0 +1,165 @@
+1 :-
+
+trigger AccountTestTrigger on Account (after insert, after update) {
+    Set<Id> acctIds = new Set<Id>();
+    for (Account a : Trigger.new) {
+        acctIds.add(a.Id);
+    }
+    
+    List<Contact> contactsToUpdate = [
+        SELECT Id, Salutation, FirstName, LastName
+        FROM Contact
+        WHERE AccountId IN :acctIds
+    ];
+    
+    for (Contact c : contactsToUpdate) {
+        c.Description = String.join(
+            new List<String>{ c.Salutation, c.FirstName, c.LastName }, 
+            ' '
+        );
+    }
+    
+    if (!contactsToUpdate.isEmpty()) {
+        update contactsToUpdate;
+    }
+}
+
+2 :-
+
+trigger AccountTrigger on Account (
+    before insert,
+    before update,
+    before delete
+) {
+    Set<Id> acctIds = Trigger.isDelete
+        ? Trigger.oldMap.keySet()
+        : Trigger.newMap.keySet();
+    
+    if (acctIds.isEmpty()) {
+        return;
+    }
+    
+    List<Opportunity> allOpps = [
+        SELECT Id, AccountId, StageName
+        FROM Opportunity
+        WHERE AccountId IN :acctIds
+          AND StageName IN ('Closed - Lost', 'Closed - Won')
+    ];
+    
+    Map<Id, List<Opportunity>> oppsByAcct = new Map<Id, List<Opportunity>>();
+    for (Opportunity o : allOpps) {
+        if (!oppsByAcct.containsKey(o.AccountId)) {
+            oppsByAcct.put(o.AccountId, new List<Opportunity>());
+        }
+        oppsByAcct.get(o.AccountId).add(o);
+    }
+    
+    for (Account a : Trigger.isDelete ? Trigger.old : Trigger.new) {
+        List<Opportunity> relatedOpps = oppsByAcct.get(a.Id);
+        if (relatedOpps == null) {
+            continue;
+        }
+        
+        for (Opportunity o : relatedOpps) {
+            if (o.StageName == 'Closed - Lost') {
+                System.debug('Logic for Closed-Lost opp on Account ' + a.Id);
+            } else {
+                System.debug('Logic for Closed-Won opp on Account ' + a.Id);
+            }
+        }
+    }
+}
+3 :-
+trigger accountLimitExample on Account (
+    after insert,
+    after update,
+    after delete
+) {
+    System.debug(
+        'Total Number of SOQL Queries allowed in this Apex code context: '
+        + Limits.getLimitQueries()
+    );
+    System.debug(
+        'Total Number of records that can be queried in this Apex code context: '
+        + Limits.getLimitQueryRows()
+    );
+    System.debug(
+        'Total Number of DML statements allowed in this Apex code context: '
+        + Limits.getLimitDmlStatements()
+    );
+    System.debug(
+        'Total Number of CPU usage time (in ms) allowed in this Apex code context: '
+        + Limits.getLimitCpuTime()
+    );
+
+    // grab the right set of Account IDs
+    Set<Id> acctIds = Trigger.isDelete
+        ? Trigger.oldMap.keySet()
+        : Trigger.newMap.keySet();
+
+    // single SOQL
+    List<Opportunity> opptys = [
+        SELECT Id, Description, Name, AccountId, CloseDate, StageName
+        FROM Opportunity
+        WHERE AccountId IN :acctIds
+    ];
+
+    System.debug(
+        '1. Number of Queries used in this Apex code so far: '
+        + Limits.getQueries()
+    );
+    System.debug(
+        '2. Number of rows queried in this Apex code so far: '
+        + Limits.getQueryRows()
+    );
+    System.debug(
+        '3. Number of DML statements used so far: '
+        + Limits.getDmlStatements()
+    );
+    System.debug(
+        '4. Amount of CPU time (in ms) used so far: '
+        + Limits.getCpuTime()
+    );
+
+    // Prevent hitting DML‐rows governor limit
+    if (Limits.getDmlRows() + opptys.size() > Limits.getLimitDmlRows()) {
+        for (Opportunity o : opptys) {
+            o.addError(
+                'Too many records (' 
+                + opptys.size() 
+                + ') to update in one transaction.'
+            );
+        }
+    } else {
+        System.debug(
+            'Continue processing. Not going to hit DML governor limits'
+        );
+        System.debug(
+            'Going to update ' 
+            + opptys.size() 
+            + ' opportunities and governor limits will allow ' 
+            + Limits.getLimitDmlRows() 
+            + ' rows'
+        );
+
+        for (Account a : (Trigger.isDelete ? Trigger.old : Trigger.new)) {
+            System.debug(
+                'Number of DML statements used so far: '
+                + Limits.getDmlStatements()
+            );
+            for (Opportunity o : opptys) {
+                if (o.AccountId == a.Id) {
+                    o.Description = 'testing';
+                }
+            }
+        }
+
+        update opptys;
+
+        System.debug(
+            'Final number of DML statements used so far: '
+            + Limits.getDmlStatements()
+        );
+        System.debug('Final heap size: ' + Limits.getHeapSize());
+    }
+}
