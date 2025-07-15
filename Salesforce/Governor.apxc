@@ -24,6 +24,8 @@ trigger AccountTestTrigger on Account (after insert, after update) {
     }
 }
 
+2 :-
+
 trigger AccountTrigger on Account (
     before insert,
     before update,
